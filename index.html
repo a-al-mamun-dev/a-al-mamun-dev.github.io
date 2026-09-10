@@ -18,7 +18,6 @@
     --brass:#B8862F;
     --brass-dim: #D3A65A;
     --teal:#146569;
-    --clay:#C1552B;
     --line:#D8D3C6;
     --line-strong:#C3BEAF;
     --max: 760px;
@@ -52,18 +51,21 @@
   }
 
   .wrap{
-    max-width:920px;
+    max-width:1180px;
     margin:0 auto;
     padding:0 28px;
+  }
+  @media (min-width:900px){
+    .wrap{ padding:0 48px; }
   }
 
   .measure{max-width:var(--max);}
 
   /* ---------- Nav ---------- */
   .top-stripe{
-    height:5px;
+    height:3px;
     width:100%;
-    background:linear-gradient(90deg, var(--teal) 0%, var(--brass) 55%, var(--clay) 100%);
+    background:linear-gradient(90deg, var(--teal) 0%, var(--brass) 100%);
   }
 
   .nav{
@@ -75,12 +77,15 @@
     border-bottom:1px solid var(--line);
   }
   .nav-inner{
-    max-width:920px;
+    max-width:1180px;
     margin:0 auto;
     padding:16px 28px;
     display:flex;
     justify-content:space-between;
     align-items:center;
+  }
+  @media (min-width:900px){
+    .nav-inner{ padding:16px 48px; }
   }
   .nav-name{
     font-family:'IBM Plex Mono', monospace;
@@ -96,28 +101,83 @@
     margin:0; padding:0;
   }
   .nav-links a{
+    position:relative;
     font-size:13.5px;
     text-decoration:none;
     color:var(--ink-soft);
-    border-bottom:1px solid transparent;
-    padding-bottom:2px;
-    transition:color 0.15s ease, border-color 0.15s ease;
+    padding-bottom:3px;
+    transition:color 0.15s ease;
   }
-  .nav-links a:hover{ color:var(--brass); border-color:var(--brass-dim); }
-  .nav-toggle{ display:none; }
+  .nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:0;
+    width:0;
+    height:2px;
+    background:linear-gradient(90deg, var(--teal), var(--brass));
+    transition:width 0.2s ease;
+  }
+  .nav-links a:hover{ color:var(--brass); }
+  .nav-links a:hover::after{ width:100%; }
+
+  .nav-toggle{
+    display:none;
+    background:none;
+    border:1px solid var(--line-strong);
+    border-radius:4px;
+    width:36px;
+    height:32px;
+    cursor:pointer;
+    padding:0;
+    position:relative;
+  }
+  .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after{
+    content:"";
+    position:absolute;
+    left:8px; right:8px;
+    height:2px;
+    background:var(--ink);
+    transition:transform 0.2s ease, opacity 0.2s ease;
+  }
+  .nav-toggle span{ top:15px; }
+  .nav-toggle span::before{ top:-6px; }
+  .nav-toggle span::after{ top:6px; }
+  .nav.is-open .nav-toggle span{ background:transparent; }
+  .nav.is-open .nav-toggle span::before{ transform:translateY(6px) rotate(45deg); }
+  .nav.is-open .nav-toggle span::after{ transform:translateY(-6px) rotate(-45deg); }
 
   @media (max-width:640px){
-    .nav-links{ display:none; }
+    .nav-toggle{ display:block; }
+    .nav-links{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      position:absolute;
+      top:100%;
+      left:0;
+      right:0;
+      background:var(--paper);
+      border-bottom:1px solid var(--line);
+      padding:8px 28px 18px;
+      max-height:0;
+      overflow:hidden;
+      transition:max-height 0.25s ease;
+    }
+    .nav.is-open .nav-links{ max-height:320px; }
+    .nav-links a{ display:block; padding:10px 0; }
+    .nav-links a::after{ display:none; }
   }
 
   /* ---------- Hero ---------- */
   .hero{
+    position:relative;
     padding:76px 0 64px;
     display:grid;
     grid-template-columns: 1.5fr 1fr;
     gap:48px;
     align-items:start;
     border-bottom:1px solid var(--line);
+    background:linear-gradient(160deg, rgba(20,101,105,0.05) 0%, rgba(20,101,105,0) 45%);
   }
   .hero-eyebrow-row{
     display:flex;
@@ -171,25 +231,41 @@
     border-radius:2px;
     padding:22px 22px 20px;
   }
+  .card-photo-wrap{
+    position:relative;
+    width:78px;
+    height:78px;
+    margin-bottom:16px;
+  }
+  .card-photo-wrap::before{
+    content:"";
+    position:absolute;
+    inset:-3px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--teal), var(--brass));
+  }
   .card-photo{
-    width:74px;
-    height:74px;
+    position:absolute;
+    inset:0;
+    width:78px;
+    height:78px;
     border-radius:50%;
     object-fit:cover;
     display:block;
-    border:2px solid var(--card);
-    box-shadow:0 0 0 2px var(--brass);
-    background:linear-gradient(135deg, var(--teal), var(--clay));
+    border:3px solid var(--card);
+    background:var(--card);
   }
   .card-photo-fallback{
-    width:74px;
-    height:74px;
+    position:absolute;
+    inset:0;
+    width:78px;
+    height:78px;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:linear-gradient(135deg, var(--teal), var(--brass) 55%, var(--clay));
-    box-shadow:0 0 0 2px var(--card), 0 0 0 3px var(--brass);
+    background:linear-gradient(135deg, var(--teal), var(--brass));
+    border:3px solid var(--card);
     font-family:'Fraunces', serif;
     font-size:24px;
     color:#F7F5EF;
@@ -240,6 +316,8 @@
   section{
     padding:64px 0;
     border-bottom:1px solid var(--line);
+    position:relative;
+    scroll-margin-top:64px;
   }
   section:last-of-type{ border-bottom:none; }
 
@@ -255,9 +333,14 @@
   }
   .section-num{
     font-family:'IBM Plex Mono', monospace;
-    font-size:12px;
+    font-size:11px;
     color:var(--brass);
-    padding-top:6px;
+    padding:5px 10px;
+    background:rgba(184,134,47,0.14);
+    border-radius:20px;
+    display:inline-block;
+    width:fit-content;
+    height:fit-content;
   }
   @media (max-width:640px){
     .section-head{ grid-template-columns:1fr; gap:8px; }
@@ -289,7 +372,9 @@
   .tl-item{
     position:relative;
     padding:0 0 40px 28px;
+    transition:transform 0.2s ease;
   }
+  .tl-item:hover{ transform:translateX(4px); }
   .tl-item:last-child{ padding-bottom:4px; }
   .tl-item::before{
     content:"";
@@ -299,6 +384,11 @@
     border-radius:50%;
     background:var(--paper);
     border:2px solid var(--teal);
+    transition:box-shadow 0.2s ease, background 0.2s ease;
+  }
+  .tl-item:hover::before{
+    background:var(--teal);
+    box-shadow:0 0 0 5px rgba(20,101,105,0.2);
   }
   .tl-period{
     font-family:'IBM Plex Mono', monospace;
@@ -328,9 +418,14 @@
   .venture{
     background:var(--card);
     border:1px solid var(--line-strong);
-    border-left:4px solid var(--clay);
+    border-left:4px solid var(--brass);
     border-radius:2px;
     padding:40px;
+    transition:box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .venture:hover{
+    box-shadow:0 14px 34px -18px rgba(28,37,48,0.35);
+    transform:translateY(-3px);
   }
   .venture-top{
     display:flex;
@@ -346,8 +441,8 @@
   .venture-status{
     font-family:'IBM Plex Mono', monospace;
     font-size:11px;
-    color:var(--clay);
-    border:1px solid var(--clay);
+    color:var(--brass);
+    border:1px solid var(--brass);
     padding:4px 9px;
     border-radius:3px;
     white-space:nowrap;
@@ -385,8 +480,16 @@
     display:grid;
     grid-template-columns: 1fr 1.6fr;
     gap:16px 24px;
-    padding:18px 0;
+    padding:18px 16px;
+    margin:0 -16px;
     border-top:1px solid var(--line);
+    border-radius:6px;
+    border-left:3px solid transparent;
+    transition:background 0.2s ease, border-left-color 0.2s ease;
+  }
+  .proj-row:hover{
+    background:rgba(20,101,105,0.05);
+    border-left-color:var(--teal);
   }
   .proj-row:last-child{ border-bottom:1px solid var(--line); }
   .proj-name{
@@ -451,6 +554,12 @@
     border-radius:3px;
     color:var(--ink-soft);
     background:var(--card);
+    transition:border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+  }
+  .chip:hover{
+    border-color:var(--teal);
+    color:var(--teal);
+    box-shadow:0 2px 8px -4px rgba(20,101,105,0.4);
   }
 
   .core-grid{
@@ -539,6 +648,16 @@
   .r3{ animation-delay:0.27s; }
   .r4{ animation-delay:0.38s; }
 
+  .io-reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .io-reveal.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+
   :focus-visible{
     outline:2px solid var(--teal);
     outline-offset:3px;
@@ -549,9 +668,10 @@
 
 <div class="top-stripe"></div>
 
-<nav class="nav">
+<nav class="nav" id="siteNav">
   <div class="nav-inner">
     <a class="nav-name" href="#top">MD. ABDULLAH AL MAMUN</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
@@ -585,7 +705,11 @@
     </div>
 
     <div class="card-id reveal r3">
-      <div class="card-photo-fallback" style="margin-bottom:16px;">AM</div>
+      <div class="card-photo-wrap">
+        <img class="card-photo" src="profile.jpg" alt="Md. Abdullah Al Mamun"
+             onerror="this.style.display='none'; document.getElementById('avatarFallback').style.display='flex';">
+        <div class="card-photo-fallback" id="avatarFallback" style="display:none;">AM</div>
+      </div>
       <div class="card-id-row">
         <span class="card-id-title">CONTACT CARD</span>
         <span class="card-id-num">NUB · CSE-24</span>
@@ -604,11 +728,11 @@
   </header>
 
   <section id="about">
-    <div class="section-head">
+    <div class="section-head io-reveal">
       <span class="section-num">01 — About</span>
       <h2>Professional summary</h2>
     </div>
-    <div class="section-body">
+    <div class="section-body io-reveal">
       <div class="filler"></div>
       <p class="about-text">
         A Computer Science and Engineering student with hands-on experience across e-commerce and business
@@ -621,11 +745,11 @@
   </section>
 
   <section id="experience">
-    <div class="section-head">
+    <div class="section-head io-reveal">
       <span class="section-num">02 — Experience</span>
       <h2>Work experience</h2>
     </div>
-    <div class="section-body">
+    <div class="section-body io-reveal">
       <div class="filler"></div>
       <div class="timeline">
         <div class="tl-item">
@@ -653,11 +777,11 @@
   </section>
 
   <section id="venture">
-    <div class="section-head">
+    <div class="section-head io-reveal">
       <span class="section-num">03 — Venture</span>
       <h2>Entrepreneurial venture</h2>
     </div>
-    <div class="section-body">
+    <div class="section-body io-reveal">
       <div class="filler"></div>
       <div class="venture">
         <div class="venture-top">
@@ -681,11 +805,11 @@
   </section>
 
   <section id="projects">
-    <div class="section-head">
+    <div class="section-head io-reveal">
       <span class="section-num">04 — Projects</span>
       <h2>Projects</h2>
     </div>
-    <div class="section-body">
+    <div class="section-body io-reveal">
       <div class="filler"></div>
       <div>
         <div class="proj-row">
@@ -752,11 +876,11 @@
   </section>
 
   <section id="education">
-    <div class="section-head">
+    <div class="section-head io-reveal">
       <span class="section-num">05 — Education</span>
       <h2>Education</h2>
     </div>
-    <div class="section-body">
+    <div class="section-body io-reveal">
       <div class="filler"></div>
       <div>
         <div class="edu-item">
@@ -776,11 +900,11 @@
   </section>
 
   <section id="leadership">
-    <div class="section-head">
+    <div class="section-head io-reveal">
       <span class="section-num">06 — Leadership</span>
       <h2>Leadership &amp; campus experience</h2>
     </div>
-    <div class="section-body">
+    <div class="section-body io-reveal">
       <div class="filler"></div>
       <div>
         <div class="lead-item">
@@ -816,11 +940,11 @@
   </section>
 
   <section id="skills">
-    <div class="section-head">
+    <div class="section-head io-reveal">
       <span class="section-num">07 — Skills</span>
       <h2>Technical &amp; core skills</h2>
     </div>
-    <div class="section-body">
+    <div class="section-body io-reveal">
       <div class="filler"></div>
       <div>
         <div class="skill-group">
@@ -871,11 +995,11 @@
   </section>
 
   <section id="certifications">
-    <div class="section-head">
+    <div class="section-head io-reveal">
       <span class="section-num">08 — Credentials</span>
       <h2>Certifications &amp; languages</h2>
     </div>
-    <div class="section-body">
+    <div class="section-body io-reveal">
       <div class="filler"></div>
       <div class="two-col">
         <div>
@@ -936,6 +1060,32 @@
   </footer>
 
 </div>
+
+<script>
+  const navEl = document.getElementById('siteNav');
+  const navToggle = document.getElementById('navToggle');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navEl.classList.toggle('is-open');
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navEl.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.io-reveal').forEach(el => io.observe(el));
+</script>
 
 </body>
 </html>
