@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Md. Abdullah Al Mamun — Portfolio</title>
+<meta name="description" content="Md. Abdullah Al Mamun — CSE student, e-commerce operator, and founder of The Personalist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDEAE1;
+    --card:#F7F5EF;
+    --ink:#1C2530;
+    --ink-soft:#535C68;
+    --ink-faint:#8A8D82;
+    --brass:#B8862F;
+    --brass-dim: #D3A65A;
+    --teal:#146569;
+    --clay:#C1552B;
+    --line:#D8D3C6;
+    --line-strong:#C3BEAF;
+    --max: 760px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16.5px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  .measure{max-width:var(--max);}
+
+  /* ---------- Nav ---------- */
+  .top-stripe{
+    height:5px;
+    width:100%;
+    background:linear-gradient(90deg, var(--teal) 0%, var(--brass) 55%, var(--clay) 100%);
+  }
+
+  .nav{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(237,234,225,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:920px;
+    margin:0 auto;
+    padding:16px 28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .nav-name{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.02em;
+    color:var(--ink);
+    text-decoration:none;
+  }
+  .nav-links{
+    display:flex;
+    gap:22px;
+    list-style:none;
+    margin:0; padding:0;
+  }
+  .nav-links a{
+    font-size:13.5px;
+    text-decoration:none;
+    color:var(--ink-soft);
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:color 0.15s ease, border-color 0.15s ease;
+  }
+  .nav-links a:hover{ color:var(--brass); border-color:var(--brass-dim); }
+  .nav-toggle{ display:none; }
+
+  @media (max-width:640px){
+    .nav-links{ display:none; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:76px 0 64px;
+    display:grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap:48px;
+    align-items:start;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-eyebrow-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:22px;
+  }
+  .hero-dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--teal);
+    flex:none;
+  }
+  .hero-role{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .hero h1{
+    font-size:clamp(34px, 5vw, 50px);
+    line-height:1.08;
+    color:var(--ink);
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--teal);
+  }
+  .hero-sub{
+    margin-top:20px;
+    font-size:17px;
+    color:var(--ink-soft);
+    max-width:52ch;
+  }
+  .hero-tags{
+    margin-top:26px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    border:1px solid var(--line-strong);
+    padding:5px 10px;
+    border-radius:3px;
+  }
+
+  .card-id{
+    background:var(--card);
+    border:1px solid var(--line-strong);
+    border-radius:2px;
+    padding:22px 22px 20px;
+  }
+  .card-photo{
+    width:74px;
+    height:74px;
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+    border:2px solid var(--card);
+    box-shadow:0 0 0 2px var(--brass);
+    background:linear-gradient(135deg, var(--teal), var(--clay));
+  }
+  .card-photo-fallback{
+    width:74px;
+    height:74px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg, var(--teal), var(--brass) 55%, var(--clay));
+    box-shadow:0 0 0 2px var(--card), 0 0 0 3px var(--brass);
+    font-family:'Fraunces', serif;
+    font-size:24px;
+    color:#F7F5EF;
+  }
+  .card-id-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    border-bottom:1px dashed var(--line-strong);
+    padding-bottom:12px;
+    margin-bottom:14px;
+  }
+  .card-id-title{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.04em;
+    color:var(--ink-faint);
+  }
+  .card-id-num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-faint);
+  }
+  .card-id dl{ margin:0; }
+  .card-id dt{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-faint);
+    margin-top:12px;
+  }
+  .card-id dt:first-child{ margin-top:0; }
+  .card-id dd{
+    margin:2px 0 0;
+    font-size:14.5px;
+  }
+  .card-id a{
+    text-decoration:none;
+    border-bottom:1px solid var(--line-strong);
+    transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .card-id a:hover{ color:var(--brass); border-color:var(--brass); }
+
+  @media (max-width:760px){
+    .hero{ grid-template-columns:1fr; padding-top:52px; }
+  }
+
+  /* ---------- Section shell ---------- */
+  section{
+    padding:64px 0;
+    border-bottom:1px solid var(--line);
+  }
+  section:last-of-type{ border-bottom:none; }
+
+  .section-head{
+    display:grid;
+    grid-template-columns: 200px 1fr;
+    gap:32px;
+    margin-bottom:36px;
+  }
+  .section-head h2{
+    font-size:26px;
+    color:var(--ink);
+  }
+  .section-num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--brass);
+    padding-top:6px;
+  }
+  @media (max-width:640px){
+    .section-head{ grid-template-columns:1fr; gap:8px; }
+  }
+
+  .section-body{
+    display:grid;
+    grid-template-columns: 200px 1fr;
+    gap:32px;
+  }
+  @media (max-width:640px){
+    .section-body{ grid-template-columns:1fr; }
+  }
+  .section-body .filler{ display:none; }
+  @media (min-width:641px){ .section-body .filler{ display:block; } }
+
+  p{ color:var(--ink-soft); }
+
+  /* ---------- About ---------- */
+  .about-text{ font-size:17px; max-width:60ch; }
+  .about-text strong{ color:var(--ink); font-weight:600; }
+
+  /* ---------- Timeline (Experience) ---------- */
+  .timeline{
+    border-left:1px solid var(--line-strong);
+    display:flex;
+    flex-direction:column;
+  }
+  .tl-item{
+    position:relative;
+    padding:0 0 40px 28px;
+  }
+  .tl-item:last-child{ padding-bottom:4px; }
+  .tl-item::before{
+    content:"";
+    position:absolute;
+    left:-5px; top:5px;
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--paper);
+    border:2px solid var(--teal);
+  }
+  .tl-period{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-faint);
+    display:block;
+    margin-bottom:6px;
+  }
+  .tl-role{
+    font-family:'Fraunces', serif;
+    font-size:20px;
+    font-weight:500;
+    color:var(--ink);
+  }
+  .tl-org{
+    font-size:14px;
+    color:var(--brass);
+    margin-top:2px;
+  }
+  .tl-desc{
+    margin-top:8px;
+    font-size:15px;
+    max-width:58ch;
+  }
+
+  /* ---------- Venture spotlight ---------- */
+  .venture{
+    background:var(--card);
+    border:1px solid var(--line-strong);
+    border-left:4px solid var(--clay);
+    border-radius:2px;
+    padding:40px;
+  }
+  .venture-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .venture h3{
+    font-size:28px;
+    color:var(--ink);
+  }
+  .venture-status{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--clay);
+    border:1px solid var(--clay);
+    padding:4px 9px;
+    border-radius:3px;
+    white-space:nowrap;
+  }
+  .venture-role{
+    font-size:14px;
+    color:var(--ink-faint);
+    margin-top:4px;
+  }
+  .venture p{ margin-top:18px; max-width:60ch; font-size:15.5px; }
+  .venture-list{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:10px 24px;
+    list-style:none;
+    padding:0;
+  }
+  .venture-list li{
+    font-size:14px;
+    color:var(--ink-soft);
+    padding-left:16px;
+    position:relative;
+  }
+  .venture-list li::before{
+    content:"—";
+    position:absolute;
+    left:0;
+    color:var(--brass);
+  }
+  @media (max-width:520px){ .venture-list{ grid-template-columns:1fr; } }
+
+  /* ---------- Projects table ---------- */
+  .proj-row{
+    display:grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap:16px 24px;
+    padding:18px 0;
+    border-top:1px solid var(--line);
+  }
+  .proj-row:last-child{ border-bottom:1px solid var(--line); }
+  .proj-name{
+    font-family:'Fraunces', serif;
+    font-size:18px;
+    font-weight:500;
+    color:var(--ink);
+  }
+  .proj-tag{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-faint);
+    margin-top:5px;
+  }
+  .proj-desc{ font-size:14.5px; }
+  .proj-stack{
+    margin-top:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--teal);
+  }
+  @media (max-width:640px){
+    .proj-row{ grid-template-columns:1fr; gap:6px; }
+  }
+
+  /* ---------- Education ---------- */
+  .edu-item{ padding:18px 0; border-top:1px solid var(--line); }
+  .edu-item:last-child{ border-bottom:1px solid var(--line); }
+  .edu-degree{ font-family:'Fraunces', serif; font-size:18px; font-weight:500; color:var(--ink); }
+  .edu-meta{ font-size:14px; color:var(--ink-faint); margin-top:4px; }
+  .edu-meta span{ color:var(--brass); }
+
+  /* ---------- Leadership ---------- */
+  .lead-item{
+    display:grid;
+    grid-template-columns: 1fr auto;
+    gap:8px 16px;
+    padding:14px 0;
+    border-top:1px solid var(--line);
+    align-items:baseline;
+  }
+  .lead-item:last-child{ border-bottom:1px solid var(--line); }
+  .lead-title{ font-size:15.5px; color:var(--ink); font-weight:500; }
+  .lead-org{ font-size:14px; color:var(--ink-soft); display:block; margin-top:2px;}
+  .lead-period{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-faint); white-space:nowrap; }
+
+  /* ---------- Skills ---------- */
+  .skill-group{ margin-bottom:26px; }
+  .skill-group:last-child{ margin-bottom:0; }
+  .skill-group-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-faint);
+    margin-bottom:10px;
+  }
+  .skill-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{
+    font-size:13.5px;
+    padding:6px 12px;
+    border:1px solid var(--line-strong);
+    border-radius:3px;
+    color:var(--ink-soft);
+    background:var(--card);
+  }
+
+  .core-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:28px;
+  }
+  .core-grid .chip{ border-color:var(--teal); color:var(--teal); background:transparent; }
+
+  /* ---------- Certifications & Languages ---------- */
+  .two-col{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+  }
+  @media (max-width:640px){ .two-col{ grid-template-columns:1fr; gap:32px; } }
+  .cert-item{ padding:12px 0; border-top:1px solid var(--line); font-size:14.5px; }
+  .cert-item:last-child{ border-bottom:1px solid var(--line); }
+  .cert-name{ color:var(--ink); font-weight:500; }
+  .cert-issuer{ color:var(--ink-faint); font-size:13px; }
+
+  .lang-item{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-top:1px solid var(--line);
+    font-size:14.5px;
+  }
+  .lang-item:last-child{ border-bottom:1px solid var(--line); }
+  .lang-level{ color:var(--ink-faint); font-family:'IBM Plex Mono', monospace; font-size:12px; }
+
+  /* ---------- Footer / Contact ---------- */
+  footer{
+    padding:60px 0 48px;
+  }
+  .contact-cta h2{
+    font-size:32px;
+    max-width:14ch;
+    margin-bottom:20px;
+  }
+  .contact-grid{
+    margin-top:32px;
+    display:grid;
+    grid-template-columns:repeat(4, auto);
+    gap:24px 36px;
+  }
+  @media (max-width:640px){ .contact-grid{ grid-template-columns:1fr 1fr; } }
+  .contact-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-faint);
+    display:block;
+    margin-bottom:6px;
+  }
+  .contact-value a, .contact-value{
+    text-decoration:none;
+    font-size:14.5px;
+    color:var(--ink);
+    border-bottom:1px solid var(--line-strong);
+    padding-bottom:1px;
+    transition:color 0.15s ease, border-color 0.15s ease;
+  }
+  .contact-value a:hover{ color:var(--brass); border-color:var(--brass); }
+  .foot-note{
+    margin-top:56px;
+    font-size:12.5px;
+    color:var(--ink-faint);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  /* ---------- Reveal on load (single orchestrated moment) ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(10px);
+    animation:revealUp 0.7s ease forwards;
+  }
+  @keyframes revealUp{
+    to{ opacity:1; transform:translateY(0); }
+  }
+  .r1{ animation-delay:0.05s; }
+  .r2{ animation-delay:0.16s; }
+  .r3{ animation-delay:0.27s; }
+  .r4{ animation-delay:0.38s; }
+
+  :focus-visible{
+    outline:2px solid var(--teal);
+    outline-offset:3px;
+  }
+</style>
+</head>
+<body>
+
+<div class="top-stripe"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-name" href="#top">MD. ABDULLAH AL MAMUN</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#venture">Venture</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero" id="top">
+    <div>
+      <div class="hero-eyebrow-row reveal r1">
+        <span class="hero-dot"></span>
+        <span class="hero-role">Dhaka, Bangladesh</span>
+      </div>
+      <h1 class="reveal r2">Building at the intersection of <em>code</em> and <em>commerce</em>.</h1>
+      <p class="hero-sub reveal r3">
+        CSE student at Northern University Bangladesh, running day-to-day e-commerce operations for a grooming brand
+        by day, and building <strong style="color:var(--ink)">The Personalist</strong> — a personal care venture —
+        on the side.
+      </p>
+      <div class="hero-tags reveal r4">
+        <span class="tag">4th Year, B.Sc. CSE</span>
+        <span class="tag">E-commerce Ops</span>
+        <span class="tag">Founder, The Personalist</span>
+      </div>
+    </div>
+
+    <div class="card-id reveal r3">
+      <div class="card-photo-fallback" style="margin-bottom:16px;">AM</div>
+      <div class="card-id-row">
+        <span class="card-id-title">CONTACT CARD</span>
+        <span class="card-id-num">NUB · CSE-24</span>
+      </div>
+      <dl>
+        <dt>Phone</dt>
+        <dd>01576638020</dd>
+        <dt>Email</dt>
+        <dd><a href="mailto:abd.al.maamun@gmail.com">abd.al.maamun@gmail.com</a></dd>
+        <dt>LinkedIn</dt>
+        <dd><a href="https://linkedin.com/in/a-al-mamun" target="_blank" rel="noopener">linkedin.com/in/a-al-mamun</a></dd>
+        <dt>GitHub</dt>
+        <dd><a href="https://github.com/a-al-mamun-dev" target="_blank" rel="noopener">github.com/a-al-mamun-dev</a></dd>
+      </dl>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="section-head">
+      <span class="section-num">01 — About</span>
+      <h2>Professional summary</h2>
+    </div>
+    <div class="section-body">
+      <div class="filler"></div>
+      <p class="about-text">
+        A Computer Science and Engineering student with hands-on experience across e-commerce and business
+        operations. <strong>Curious about technology, digital business, and entrepreneurship</strong> — with a habit
+        of turning that curiosity into real projects and practical business ideas, rather than leaving them as
+        plans. Currently balancing coursework, an operations role at a grooming e-commerce brand, and the early
+        build-out of a personal care venture of his own.
+      </p>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-head">
+      <span class="section-num">02 — Experience</span>
+      <h2>Work experience</h2>
+    </div>
+    <div class="section-body">
+      <div class="filler"></div>
+      <div class="timeline">
+        <div class="tl-item">
+          <span class="tl-period">2024 — Present</span>
+          <div class="tl-role">E-commerce &amp; Customer Support</div>
+          <div class="tl-org">White Cloud — Men's Grooming Essentials</div>
+          <p class="tl-desc">Manages customer support and day-to-day e-commerce operations, including orders,
+            website updates, inventory, and courier coordination.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-period">Approx. 5 years</span>
+          <div class="tl-role">Pharmacy Assistant</div>
+          <div class="tl-org">Nur Pharmacy</div>
+          <p class="tl-desc">Supported daily pharmacy operations, customer service, product handling, and
+            inventory management.</p>
+        </div>
+        <div class="tl-item">
+          <span class="tl-period">2021 — 2022</span>
+          <div class="tl-role">Tutor</div>
+          <div class="tl-org">Local Madrashah</div>
+          <p class="tl-desc">Taught Math and English to students from class 1 to 6.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="venture">
+    <div class="section-head">
+      <span class="section-num">03 — Venture</span>
+      <h2>Entrepreneurial venture</h2>
+    </div>
+    <div class="section-body">
+      <div class="filler"></div>
+      <div class="venture">
+        <div class="venture-top">
+          <div>
+            <h3>The Personalist</h3>
+            <div class="venture-role">Founder — Personal Care E-commerce</div>
+          </div>
+          <span class="venture-status">In progress</span>
+        </div>
+        <p>An upcoming personal care venture built around authentic imported personal care products. Everything —
+          from the brand's voice to its first storefront — is being built from the ground up, drawing directly on
+          lessons from running White Cloud's e-commerce operations.</p>
+        <ul class="venture-list">
+          <li>Brand development</li>
+          <li>Business planning</li>
+          <li>Digital presence</li>
+          <li>E-commerce strategy</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-head">
+      <span class="section-num">04 — Projects</span>
+      <h2>Projects</h2>
+    </div>
+    <div class="section-body">
+      <div class="filler"></div>
+      <div>
+        <div class="proj-row">
+          <div>
+            <div class="proj-name">Bus Koi</div>
+            <span class="proj-tag">University project</span>
+          </div>
+          <div>
+            <p class="proj-desc">A transport-related problem-solving project built in C.</p>
+            <div class="proj-stack">C</div>
+          </div>
+        </div>
+        <div class="proj-row">
+          <div>
+            <div class="proj-name">NUB To-Let Hub</div>
+            <span class="proj-tag">University project</span>
+          </div>
+          <div>
+            <p class="proj-desc">A platform focused on to-let and rental-related services for the university
+              community.</p>
+            <div class="proj-stack">PHP · HTML · Oracle Database</div>
+          </div>
+        </div>
+        <div class="proj-row">
+          <div>
+            <div class="proj-name">RedDrop</div>
+            <span class="proj-tag">Personal project — ongoing</span>
+          </div>
+          <div>
+            <p class="proj-desc">An ongoing project focused on building a practical digital solution.</p>
+          </div>
+        </div>
+        <div class="proj-row">
+          <div>
+            <div class="proj-name">HealthyLife Everyday</div>
+            <span class="proj-tag">Personal project — ongoing</span>
+          </div>
+          <div>
+            <p class="proj-desc">A lifestyle tracker that helps users monitor daily activity and build healthier
+              habits.</p>
+          </div>
+        </div>
+        <div class="proj-row">
+          <div>
+            <div class="proj-name">StudGoods</div>
+            <span class="proj-tag">Personal project — ongoing</span>
+          </div>
+          <div>
+            <p class="proj-desc">A student-focused tool for task management and organizing daily goods.</p>
+          </div>
+        </div>
+        <div class="proj-row">
+          <div>
+            <div class="proj-name">Prayer &amp; Good Tracking</div>
+            <span class="proj-tag">Personal project — ongoing</span>
+          </div>
+          <div>
+            <p class="proj-desc">A personal development project for tracking prayers, positive actions, and
+              personal growth.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-head">
+      <span class="section-num">05 — Education</span>
+      <h2>Education</h2>
+    </div>
+    <div class="section-body">
+      <div class="filler"></div>
+      <div>
+        <div class="edu-item">
+          <div class="edu-degree">B.Sc. in Computer Science &amp; Engineering</div>
+          <div class="edu-meta">Northern University Bangladesh · <span>2023 — Present, 4th Year</span></div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">Alim (HSC Equivalent)</div>
+          <div class="edu-meta">Ta'mirul Millat Kamil Madrasah · Completed 2022 · <span>GPA 5.00</span></div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">Dakhil (SSC Equivalent)</div>
+          <div class="edu-meta">Ta'mirul Millat Kamil Madrasah · Completed 2020 · <span>GPA 5.00</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="leadership">
+    <div class="section-head">
+      <span class="section-num">06 — Leadership</span>
+      <h2>Leadership &amp; campus experience</h2>
+    </div>
+    <div class="section-body">
+      <div class="filler"></div>
+      <div>
+        <div class="lead-item">
+          <div>
+            <span class="lead-title">Joint Secretary (Event)</span>
+            <span class="lead-org">NUB Computer Club (NUBCC)</span>
+          </div>
+          <span class="lead-period">2025 — Present</span>
+        </div>
+        <div class="lead-item">
+          <div>
+            <span class="lead-title">Campus Ambassador</span>
+            <span class="lead-org">ICT Olympiad Bangladesh</span>
+          </div>
+          <span class="lead-period">2024 — 2026</span>
+        </div>
+        <div class="lead-item">
+          <div>
+            <span class="lead-title">Campus Ambassador</span>
+            <span class="lead-org">International Leadership Competition</span>
+          </div>
+          <span class="lead-period">2024 — 2026</span>
+        </div>
+        <div class="lead-item">
+          <div>
+            <span class="lead-title">Brand Representative (Leader)</span>
+            <span class="lead-org">Interactive Cares</span>
+          </div>
+          <span class="lead-period">2024</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head">
+      <span class="section-num">07 — Skills</span>
+      <h2>Technical &amp; core skills</h2>
+    </div>
+    <div class="section-body">
+      <div class="filler"></div>
+      <div>
+        <div class="skill-group">
+          <div class="skill-group-label">PROGRAMMING &amp; DEVELOPMENT</div>
+          <div class="skill-chips">
+            <span class="chip">C</span><span class="chip">C++</span><span class="chip">PHP</span><span class="chip">HTML</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">DATABASE</div>
+          <div class="skill-chips">
+            <span class="chip">Oracle SQL</span><span class="chip">Oracle Database</span><span class="chip">Oracle Live SQL</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">WEB &amp; E-COMMERCE</div>
+          <div class="skill-chips">
+            <span class="chip">WordPress</span><span class="chip">WooCommerce</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">MICROSOFT &amp; GOOGLE TOOLS</div>
+          <div class="skill-chips">
+            <span class="chip">Microsoft Word</span><span class="chip">Microsoft Excel</span><span class="chip">Google Sheets</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">DIGITAL TOOLS</div>
+          <div class="skill-chips">
+            <span class="chip">Canva Pro</span><span class="chip">Meta Business Suite</span><span class="chip">Pathao Merchant</span><span class="chip">GitHub</span>
+          </div>
+        </div>
+
+        <div class="skill-group-label" style="margin-top:36px;">CORE SKILLS</div>
+        <div class="core-grid">
+          <span class="chip">E-commerce Operations</span>
+          <span class="chip">Customer Support</span>
+          <span class="chip">Business Operations</span>
+          <span class="chip">Order &amp; Inventory Management</span>
+          <span class="chip">Website Management</span>
+          <span class="chip">Digital Business</span>
+          <span class="chip">Data Management</span>
+          <span class="chip">Problem Solving</span>
+          <span class="chip">Team Collaboration</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <div class="section-head">
+      <span class="section-num">08 — Credentials</span>
+      <h2>Certifications &amp; languages</h2>
+    </div>
+    <div class="section-body">
+      <div class="filler"></div>
+      <div class="two-col">
+        <div>
+          <div class="skill-group-label" style="margin-bottom:4px;">CERTIFICATIONS</div>
+          <div class="cert-item">
+            <div class="cert-name">Microsoft Excel Certification</div>
+            <div class="cert-issuer">Udemy</div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-name">VibeCode with AI</div>
+            <div class="cert-issuer">Udemy</div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-name">C-Category Pharmacist Certification</div>
+            <div class="cert-issuer">Registration no. Pharmacy C-133996</div>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-label" style="margin-bottom:4px;">LANGUAGES</div>
+          <div class="lang-item"><span>Bangla</span><span class="lang-level">Native</span></div>
+          <div class="lang-item"><span>English</span><span class="lang-level">Professional working</span></div>
+          <div class="lang-item"><span>Arabic</span><span class="lang-level">Basic</span></div>
+          <div class="lang-item"><span>Urdu</span><span class="lang-level">Conversational</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="contact-cta">
+      <span class="section-num" style="display:block; margin-bottom:14px;">09 — Contact</span>
+      <h2>Let's build something worth shipping.</h2>
+      <p style="max-width:50ch;">Open to opportunities in digital business, e-commerce, and technology —
+        and always glad to talk shop about The Personalist.</p>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <span class="contact-label">EMAIL</span>
+        <span class="contact-value"><a href="mailto:abd.al.maamun@gmail.com">abd.al.maamun@gmail.com</a></span>
+      </div>
+      <div>
+        <span class="contact-label">PHONE</span>
+        <span class="contact-value">01576638020</span>
+      </div>
+      <div>
+        <span class="contact-label">LINKEDIN</span>
+        <span class="contact-value"><a href="https://linkedin.com/in/a-al-mamun" target="_blank" rel="noopener">a-al-mamun</a></span>
+      </div>
+      <div>
+        <span class="contact-label">GITHUB</span>
+        <span class="contact-value"><a href="https://github.com/a-al-mamun-dev" target="_blank" rel="noopener">a-al-mamun-dev</a></span>
+      </div>
+    </div>
+    <div class="foot-note">
+      <span>Md. Abdullah Al Mamun · Dhaka, Bangladesh</span>
+      <span>Think deep. Code smart. Stay humble.</span>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
